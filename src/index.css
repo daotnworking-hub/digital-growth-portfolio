@@ -1,0 +1,639 @@
+@import "tailwindcss";
+
+:root {
+  --bg-deep: #060312;
+  --bg-secondary: #0d0624;
+  --bg-tertiary: #170b3b;
+  --neon-cyan: #00f0ff;
+  --neon-pink: #ff007f;
+  --neon-purple: #a855f7;
+  --neon-orange: #ff8c00;
+  --neon-emerald: #00ff88;
+  --neon-blue: #3b82f6;
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-glass: rgba(255, 255, 255, 0.15);
+  --border-glow-cyan: rgba(0, 240, 255, 0.5);
+  --border-glow-pink: rgba(255, 0, 127, 0.5);
+  --glass-bg: rgba(13, 6, 36, 0.7);
+  --glass-mirror-bg: rgba(23, 11, 59, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 10% 15%, rgba(255, 0, 127, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.12) 0%, transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(255, 140, 0, 0.1) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cabinet Grotesk', 'Outfit', sans-serif;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+  border-radius: 5px;
+}
+
+/* MAXIMALIST Glassmorphism ("Tráng Gương / Mirror Reflection") */
+.glass-mirror {
+  background: var(--glass-mirror-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Shine sweep animation on glass hover */
+.glass-mirror::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s ease-in-out;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.glass-mirror:hover::before {
+  left: 150%;
+}
+
+.glass-mirror:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 15px 35px -5px rgba(0, 240, 255, 0.3), inset 0 1px 1px rgba(0, 240, 255, 0.4);
+  transform: translateY(-6px) scale(1.01);
+}
+
+.glass-mirror-pink:hover {
+  border-color: var(--neon-pink);
+  box-shadow: 0 15px 35px -5px rgba(255, 0, 127, 0.35), inset 0 1px 1px rgba(255, 0, 127, 0.4);
+}
+
+.glass-mirror-orange:hover {
+  border-color: var(--neon-orange);
+  box-shadow: 0 15px 35px -5px rgba(255, 140, 0, 0.35), inset 0 1px 1px rgba(255, 140, 0, 0.4);
+}
+
+/* Header Glass */
+.glass-header {
+  background: rgba(6, 3, 18, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 25px rgba(0, 240, 255, 0.1);
+}
+
+/* Text Gradients & Glows */
+.neon-text-cyan {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.6), 0 0 30px rgba(0, 240, 255, 0.3);
+}
+
+.neon-text-pink {
+  color: var(--neon-pink);
+  text-shadow: 0 0 15px rgba(255, 0, 127, 0.6), 0 0 30px rgba(255, 0, 127, 0.3);
+}
+
+.neon-text-orange {
+  color: var(--neon-orange);
+  text-shadow: 0 0 15px rgba(255, 140, 0, 0.6), 0 0 30px rgba(255, 140, 0, 0.3);
+}
+
+.gradient-maximalist {
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4));
+}
+
+.gradient-fire {
+  background: linear-gradient(135deg, #fff 0%, var(--neon-orange) 60%, var(--neon-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.4));
+}
+
+/* Neon Buttons with Spark & Lightning Hover */
+.btn-neon-cyan {
+  background: linear-gradient(135deg, var(--neon-cyan), #0088ff);
+  color: #060312;
+  font-weight: 800;
+  padding: 14px 32px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.5), 0 4px 15px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-neon-cyan:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.8), 0 8px 25px rgba(0, 240, 255, 0.4);
+  filter: brightness(1.15);
+}
+
+.btn-neon-pink {
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+  color: #ffffff;
+  font-weight: 800;
+  padding: 14px 32px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 25px rgba(255, 0, 127, 0.5), 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.btn-neon-pink:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 35px rgba(255, 0, 127, 0.8), 0 8px 25px rgba(255, 0, 127, 0.4);
+  filter: brightness(1.15);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes lightning-flash {
+  0%, 90%, 100% { opacity: 0; }
+  92% { opacity: 1; filter: drop-shadow(0 0 20px #00f0ff); }
+  94% { opacity: 0.2; }
+  96% { opacity: 1; filter: drop-shadow(0 0 30px #ff007f); }
+  98% { opacity: 0; }
+}
+
+.animate-lightning {
+  animation: lightning-flash 5s infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+/* Layout Container */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Custom Slider for ROAS Calculator */
+.custom-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan);
+  border: 2px solid #fff;
+  transition: transform 0.15s ease;
+}
+
+.custom-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+
+/* Modal Backing */
+.modal-overlay {
+  background: rgba(6, 3, 18, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ================================================================
+   FIRE & LIGHTNING THEME LAYER — wireframe-framework-v3 integration
+   All new tokens use --fl- prefix. All new classes use .fl- prefix.
+   Nothing below overrides existing variables or classes.
+   Audit: site uses --neon-*, --bg-deep, .glass-mirror, .btn-neon-*.
+   New tokens are ADDITIVE only — they map fire/lightning energy
+   onto the existing Neon Cyberpunk palette without colliding.
+================================================================ */
+
+:root {
+  /* ── Fire & Lightning color tokens (namespaced) ─────────── */
+  --fl-fire-1:      #FF5A1F;  /* Magma orange — CTA/accent     */
+  --fl-fire-2:      #FFB020;  /* Ember gold   — stats/numbers  */
+  --fl-bolt-1:      #7CF5FF;  /* Electric cyan — hover/kinetic */
+  --fl-bolt-2:      #8B7BFF;  /* Violet spark  — gradient corner */
+  --fl-bg:          #0B0806;
+  --fl-surface:     #1C1512;
+  --fl-text:        #F4ECE2;
+  --fl-text-muted:  #A89A8C;
+}
+
+/* ── Display font (Bebas Neue) for Hero H1 ──────────────────
+   Applied via .fl-display — doesn't affect existing heading rules */
+.fl-display {
+  font-family: 'Bebas Neue', 'Cabinet Grotesk', sans-serif !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1.05 !important;
+}
+
+/* ── JetBrains Mono for stat numbers ────────────────────── */
+.fl-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: var(--fl-fire-2);
+}
+
+/* Gradient underline beneath each stat number */
+.fl-stat-underline {
+  display: block;
+  height: 3px;
+  margin-top: 6px;
+  background: linear-gradient(90deg, var(--fl-fire-1), var(--fl-bolt-1));
+  border-radius: 2px;
+  width: 100%;
+}
+
+/* ── Stats jolt — fires when counter lands ──────────────── */
+@keyframes fl-jolt {
+  0%   { transform: translateX(0)   rotate(0deg); }
+  20%  { transform: translateX(-3px) rotate(-0.5deg); }
+  40%  { transform: translateX( 3px) rotate( 0.5deg); }
+  60%  { transform: translateX(-2px) rotate( 0deg); }
+  80%  { transform: translateX( 2px) rotate( 0deg); }
+  100% { transform: translateX(0)   rotate(0deg); }
+}
+.fl-jolt-active {
+  animation: fl-jolt 0.28s ease-in-out;
+}
+
+/* ── .fl-card — rotating conic-gradient border on hover ─────
+   Uses @property so angle animates smoothly.
+   Applied ADDITIVELY on top of existing cards — no overrides.
+   Uses ::after so it doesn't conflict with .glass-mirror::before
+   (which handles the shine-sweep on the same elements).        */
+@property --fl-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes fl-spin-border {
+  to { --fl-angle: 360deg; }
+}
+
+.fl-card {
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.35s ease;
+}
+
+.fl-card::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  background: conic-gradient(
+    from var(--fl-angle),
+    var(--fl-fire-1),
+    var(--fl-fire-2),
+    var(--fl-bolt-1),
+    var(--fl-bolt-2),
+    var(--fl-fire-1)
+  );
+  transition: opacity 0.35s ease;
+}
+
+.fl-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 0 24px rgba(124, 245, 255, 0.18),
+    0 12px 40px rgba(0, 0, 0, 0.7);
+}
+
+.fl-card:hover::after {
+  opacity: 1;
+  animation: fl-spin-border 2.5s linear infinite;
+}
+
+/* ── Ember particles (CSS-only, ≤12, no library) ────────────
+   Parent must be position:relative overflow:hidden for clipping */
+.fl-ember-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+@keyframes fl-ember-rise {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.9;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-85vh)
+               translateX(var(--fl-drift, 20px))
+               scale(0.25);
+    opacity: 0;
+  }
+}
+
+.fl-ember {
+  position: absolute;
+  bottom: 5%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--fl-fire-2);
+  box-shadow:
+    0 0 6px  var(--fl-fire-2),
+    0 0 14px var(--fl-fire-1);
+  animation: fl-ember-rise
+    var(--fl-dur, 5s)
+    ease-in
+    var(--fl-delay, 0s)
+    infinite;
+}
+
+/* 12 individual ember positions & timings */
+.fl-e1  { left:  7%; --fl-dur:5.3s; --fl-delay:0.0s; --fl-drift:  24px; width:4px; height:4px; }
+.fl-e2  { left: 14%; --fl-dur:6.8s; --fl-delay:1.1s; --fl-drift: -30px; }
+.fl-e3  { left: 22%; --fl-dur:4.9s; --fl-delay:0.5s; --fl-drift:  16px; width:3px; height:3px; }
+.fl-e4  { left: 30%; --fl-dur:7.2s; --fl-delay:2.3s; --fl-drift: -22px; }
+.fl-e5  { left: 42%; --fl-dur:5.7s; --fl-delay:0.8s; --fl-drift:  35px; width:3px; height:3px; }
+.fl-e6  { left: 55%; --fl-dur:6.1s; --fl-delay:1.7s; --fl-drift: -15px; width:4px; height:4px; }
+.fl-e7  { left: 62%; --fl-dur:4.8s; --fl-delay:3.0s; --fl-drift:  28px; }
+.fl-e8  { left: 71%; --fl-dur:7.4s; --fl-delay:0.3s; --fl-drift: -40px; width:3px; height:3px; }
+.fl-e9  { left: 79%; --fl-dur:5.9s; --fl-delay:1.9s; --fl-drift:  20px; }
+.fl-e10 { left: 87%; --fl-dur:6.5s; --fl-delay:0.6s; --fl-drift: -18px; width:4px; height:4px; }
+.fl-e11 { left: 93%; --fl-dur:5.1s; --fl-delay:2.7s; --fl-drift:  22px; }
+.fl-e12 { left:  3%; --fl-dur:7.9s; --fl-delay:1.4s; --fl-drift: -25px; width:3px; height:3px; }
+
+/* ── Hero breathing gradient ────────────────────────────────
+   Low-opacity radial glow that slowly "breathes" in the Hero */
+@keyframes fl-breathe {
+  0%, 100% { opacity: 0.05; transform: scale(1);    }
+  50%       { opacity: 0.11; transform: scale(1.08); }
+}
+
+.fl-hero-breathe {
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 70%;
+  height: 80%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--fl-fire-1) 0%,
+    rgba(255, 176, 32, 0.4) 35%,
+    transparent 70%
+  );
+  animation: fl-breathe 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+/* Second breathing node — top-left, cooler bolt energy */
+.fl-hero-breathe-bolt {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 45%;
+  height: 55%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--fl-bolt-2) 0%,
+    rgba(124, 245, 255, 0.25) 40%,
+    transparent 70%
+  );
+  animation: fl-breathe 11s ease-in-out 1.5s infinite;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+/* ── Fracture Line SVG (drawn on scroll via IntersectionObserver) */
+.fl-fracture-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 4;
+}
+
+.fl-fracture-path {
+  fill: none;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 0 4px #FFB020) drop-shadow(0 0 10px #7CF5FF);
+}
+
+.fl-fracture-path.fl-drawn {
+  stroke-dashoffset: 0;
+}
+
+/* ── Reduced-motion — ALL fire/lightning animation disabled ─ */
+@media (prefers-reduced-motion: reduce) {
+  .fl-ember          { animation: none; opacity: 0; }
+  .fl-hero-breathe,
+  .fl-hero-breathe-bolt { animation: none; opacity: 0.05; }
+  .fl-card:hover::after { animation: none; }
+  .fl-jolt-active    { animation: none; }
+  .fl-fracture-path  { transition: none; }
+}
+
+/* ── animate-fadeIn (for slide transitions) ──────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.45s ease-out forwards;
+}
+
+/* ── CTA Button bolt streak (one-shot on hover, does NOT loop) ─
+   Applied via .fl-btn-bolt on top of existing button classes.
+   Uses ::before so it doesn't conflict with existing ::before    */
+@keyframes fl-bolt-streak {
+  0%   { transform: translateX(-130%) skewX(-18deg); opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateX(230%)  skewX(-18deg); opacity: 0; }
+}
+
+.fl-btn-bolt {
+  overflow: hidden;
+  position: relative;
+}
+
+.fl-btn-bolt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(124, 245, 255, 0.7),
+    rgba(255, 176, 32, 0.6),
+    transparent
+  );
+  transform: translateX(-130%) skewX(-18deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* One-shot: animation runs once and stops (forwards fill keeps it gone) */
+.fl-btn-bolt:hover::before {
+  animation: fl-bolt-streak 0.48s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fl-btn-bolt:hover::before { animation: none; }
+}
+
+/* ── Nav active state indicator ─────────────────────────────
+   .fl-nav-active highlights the link matching current section  */
+.fl-nav-active {
+  color: var(--fl-fire-2) !important;
+  position: relative;
+}
+.fl-nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--fl-fire-1), var(--fl-bolt-1));
+  border-radius: 1px;
+  box-shadow: 0 0 6px rgba(124, 245, 255, 0.5);
+}
+
+/* ── Scroll-reveal: fade + slide-up ─────────────────────────
+   Elements start hidden; .fl-visible class added by IO         */
+.fl-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity  0.72s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.fl-reveal.fl-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay helpers */
+.fl-reveal-d1 { transition-delay: 0.08s; }
+.fl-reveal-d2 { transition-delay: 0.18s; }
+.fl-reveal-d3 { transition-delay: 0.28s; }
+.fl-reveal-d4 { transition-delay: 0.38s; }
+.fl-reveal-d5 { transition-delay: 0.48s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fl-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+
